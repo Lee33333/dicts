@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+# #!/usr/bin/env python
 
 
 def count_unique(string1):
@@ -97,17 +97,22 @@ def unique_common_items(list1, list2):
 
     """
 
-    no_multiples = common_items(list1, list2)
+    def isin(lists, element):
+        for num in lists:
+            if num == element:
+                return True
+        return False
+
+    common = common_items(list1, list2)
+
     newlist = []
 
-    for i in range(0, len(no_multiples)-1):
-        for j in range(i+1, len(no_multiples)-1):
-            if no_multiples[i] == no_multiples[j]:
-                newlist.append(no_multiples[i])
-                
+    for item in common:
+        if isin(newlist, item) == False:
+            newlist.append(item)
+
     return newlist
 
-    #FIXIT!!!!!!!!!!!!!!!!!!!!!
 
 
 def sum_zero(list1):
@@ -135,13 +140,24 @@ def sum_zero(list1):
         [[-2, 2], [-1, 1], [0, 0]]
 
     """
+
     newlist = []
+    finallist = []
 
-    # i = 0
-    # j = 
+    for i in range(0, len(list1)):
+        for j in range(i, len(list1)):
+            if list1[i] + list1[j] == 0:
+                if list1[i] not in newlist and -list1[i] not in newlist:
+                    newlist.append(list1[i])
 
-    return []
+    for item in newlist:
+        finallist.append([item, -item])
 
+    return finallist
+
+ourlist = [1, -1, 5, 6, 7, 8, 7]
+
+print sum_zero(ourlist)
 
 def find_duplicates(words):
     """Given a list of words, return the list with duplicates removed.
@@ -160,7 +176,14 @@ def find_duplicates(words):
 
     """
 
-    return []
+    mylist = []
+
+    for word in words:
+        if word  not in mylist:
+            mylist.append(word)
+
+    return mylist
+
 
 
 def word_length(words):
@@ -177,7 +200,16 @@ def word_length(words):
 
     """
 
-    return []
+    dicts = {}
+
+    for word in words:
+        length = len(word)
+        if length in dicts:
+            dicts[length].append(word)
+        else:
+            dicts[length] = [word]
+
+    return dicts.items()
 
 
 def adv_word_length_sorted_words(words):
@@ -194,9 +226,26 @@ def adv_word_length_sorted_words(words):
         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
 
     """
+    dicts = {}
+    final_list = []
 
-    return []
+    for word in words:
+        length = len(word)
+        if length in dicts:
+            dicts[length].append(word)
+        else:
+            dicts[length] = [word]
 
+    sorted_keys = sorted(dicts)
+
+    for key in sorted_keys:
+        final_list.append((key, dicts[key]))
+
+    return final_list
+
+# mylist = ["daria", "cam", "rabbits"]
+
+# print adv_word_length_sorted_words(mylist)
 
 def pirate_talk(phrase):
     """Translate phrase to pirate talk.
