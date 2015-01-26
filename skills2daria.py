@@ -238,6 +238,9 @@ def adv_word_length_sorted_words(words):
 
     sorted_keys = sorted(dicts)
 
+    for key in dicts:
+        dicts[key]= sorted(dicts[key])
+
     for key in sorted_keys:
         final_list.append((key, dicts[key]))
 
