@@ -292,8 +292,27 @@ def pirate_talk(phrase):
         'me swabbie be not a man!'
 
     """
+    piratedict = {}
+    new_phrase = []
 
-    return ""
+    phrase_words = phrase.split()
+
+    english = ['sir', 'hotel', 'student', 'boy', 'madam', 'professor', 'restaurant', 'your', 'excuse', 'students','are', 'lawyer', 'the', 'restroom', 'my', 'hello', 'is', 'man']
+    pirate = ['matey', 'fleabag inn', 'swabbie', 'matey', 'proud beauty', 'foul blaggart', 'galley', 'yer', 'arr', 'swabbies', 'be', 'foul blaggart', 'th\'', 'head', 'me', 'avast', 'be', 'matey']
+  
+    for i in range(len(english)):
+        piratedict[english[i]] = pirate[i]
+
+    for word in phrase_words:
+        if word in piratedict:
+            word = piratedict[word]
+            new_phrase.append(word)
+        else:
+            new_phrase.append(word)
+
+    final_phrase = ' '.join(new_phrase)
+
+    return final_phrase
 
 
 ##############################################################################
