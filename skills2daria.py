@@ -27,6 +27,19 @@ def count_unique(string1):
         {'Porcupine': 1, 'do.': 1, 'porcupine': 1, 'see,': 1}
 
     """
+    our_dict = {}
+
+    words = string1.split()
+    
+    for word in words:
+        if word in our_dict:
+            our_dict[word] = our_dict[word] + 1
+        else:
+            our_dict[word] = 1
+
+    return our_dict
+
+
     words = string1.split()
     d = {}
     for word in words:
@@ -65,6 +78,16 @@ def common_items(list1, list2):
         [1, 1, 2, 2]
 
     """
+
+    newlist = []
+
+    for word1 in list1:
+        for word2 in list2:
+            if word1 == word2:
+                newlist.append(word1)
+
+    return newlist
+
     common = []
 
     for word1 in list1:
@@ -96,6 +119,7 @@ def unique_common_items(list1, list2):
         [1, 2]
 
     """
+
 
     def isin(lists, element):
         for num in lists:
@@ -141,23 +165,42 @@ def sum_zero(list1):
 
     """
 
-    newlist = []
-    finallist = []
 
-    for i in range(0, len(list1)):
-        for j in range(i, len(list1)):
-            if list1[i] + list1[j] == 0:
-                if list1[i] not in newlist and -list1[i] not in newlist:
-                    newlist.append(list1[i])
+    zerosdict = {}
 
-    for item in newlist:
-        finallist.append([item, -item])
+    zeroslist = []
 
-    return finallist
 
-ourlist = [1, -1, 5, 6, 7, 8, 7]
+    for item1 in list1:
+        for item2 in list1:
+            if item1+ item2 == 0:
+                if item1 not in zerosdict and -item1 not in zerosdict:
+                    zerosdict[item1]= (-item1)
 
-print sum_zero(ourlist)
+    zeroslist = zerosdict.items()
+
+    return zeroslist
+
+
+
+
+#     newlist = []
+#     finallist = []
+
+#     for i in range(0, len(list1)):
+#         for j in range(i, len(list1)):
+#             if list1[i] + list1[j] == 0:
+#                 if list1[i] not in newlist and -list1[i] not in newlist:
+#                     newlist.append(list1[i])
+
+#     for item in newlist:
+#         finallist.append([item, -item])
+
+#     return finallist
+
+# ourlist = [1, -1, 5, 6, 7, 8, 7]
+
+# print sum_zero(ourlist)
 
 def find_duplicates(words):
     """Given a list of words, return the list with duplicates removed.
@@ -176,13 +219,28 @@ def find_duplicates(words):
 
     """
 
-    mylist = []
+    myset = set(words)
 
-    for word in words:
-        if word  not in mylist:
-            mylist.append(word)
+    return myset
 
-    return mylist
+
+    # mylist = []
+
+    # for word in words:
+    #     if word not in mylist:
+    #         mylist.append(word)
+
+    # return mylist
+
+
+
+    # mylist = []
+
+    # for word in words:
+    #     if word  not in mylist:
+    #         mylist.append(word)
+
+    # return mylist
 
 
 
@@ -199,17 +257,29 @@ def word_length(words):
         [(1, ['a']), (2, ['ok', 'an']), (3, ['day']), (5, ['apple'])]
 
     """
-
-    dicts = {}
+    ourdict = {}
 
     for word in words:
-        length = len(word)
-        if length in dicts:
-            dicts[length].append(word)
+        wordlength = len(word)
+        if wordlength in ourdict:
+            ourdict[wordlength] = ourdict[wordlength] + [word]
         else:
-            dicts[length] = [word]
+            ourdict[wordlength] = [word]
 
-    return dicts.items()
+    return ourdict.items()
+
+
+
+#     dicts = {}
+
+#     for word in words:
+#         length = len(word)
+#         if length in dicts:
+#             dicts[length].append(word)
+#         else:
+#             dicts[length] = [word]
+
+#     return dicts.items()
 
 
 def adv_word_length_sorted_words(words):
@@ -226,25 +296,43 @@ def adv_word_length_sorted_words(words):
         [(1, ['a']), (2, ['an', 'ok']), (3, ['day']), (5, ['apple'])]
 
     """
-    dicts = {}
-    final_list = []
+
+    ourdict = {}
 
     for word in words:
-        length = len(word)
-        if length in dicts:
-            dicts[length].append(word)
+        wordlength = len(word)
+        if wordlength in ourdict:
+            ourdict[wordlength] = ourdict[wordlength] + [word]
         else:
-            dicts[length] = [word]
+            ourdict[wordlength] = [word]
 
-    sorted_keys = sorted(dicts)
+    for key in ourdict:
+        ourdict[key] = sorted(ourdict[key])
 
-    for key in dicts:
-        dicts[key]= sorted(dicts[key])
+    return ourdict.items()
 
-    for key in sorted_keys:
-        final_list.append((key, dicts[key]))
 
-    return final_list
+
+
+#     dicts = {}
+#     final_list = []
+
+#     for word in words:
+#         length = len(word)
+#         if length in dicts:
+#             dicts[length].append(word)
+#         else:
+#             dicts[length] = [word]
+
+#     sorted_keys = sorted(dicts)
+
+#     for key in dicts:
+#         dicts[key]= sorted(dicts[key])
+
+#     for key in sorted_keys:
+#         final_list.append((key, dicts[key]))
+
+#     return final_list
 
 # mylist = ["daria", "cam", "rabbits"]
 
